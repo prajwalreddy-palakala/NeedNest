@@ -11,8 +11,24 @@ connectDB();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// CORS — allow local dev + production Render frontend
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://neednest-frontend.onrender.com',
+  process.env.FRONTEND_URL, // optional override via env
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS blocked: ${origin}`));
+    }
+  },
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.get("/health", (req, res) => {
