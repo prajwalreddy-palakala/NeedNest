@@ -1,0 +1,90 @@
+# ============================================================
+#  NeedNest – Root .gitignore (MERN Stack)
+# ============================================================
+
+# ----- Dependencies ----------------------------------------
+node_modules/
+.pnp
+.pnp.js
+
+# ----- Environment Variables (NEVER commit secrets) --------
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+backend/.env
+
+# ----- Build Output ----------------------------------------
+# Frontend Vite build
+frontend/dist/
+frontend/build/
+
+# ----- Uploads (user-generated content) --------------------
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ----- Logs -------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ----- Runtime / Cache -------------------------------------
+.cache/
+.parcel-cache/
+.vite/
+frontend/.vite/
+
+# ----- Testing ----------------------------------------------
+coverage/
+*.lcov
+.nyc_output/
+
+# ----- OS Generated Files ----------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ----- Editor & IDE ----------------------------------------
+# VS Code
+.vscode/
+!.vscode/extensions.json
+
+# JetBrains IDEs (WebStorm, IntelliJ, etc.)
+.idea/
+*.iml
+*.iws
+
+# Vim / Emacs swap files
+*.swp
+*.swo
+*.swn
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+
+# ----- Misc ------------------------------------------------
+*.tgz
+*.zip
+*.tar.gz
+build_error.log

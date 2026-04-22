@@ -356,4 +356,32 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
+// @route   POST /api/auth/dev-register
+// @desc    DEV ONLY - Register without OTP (remove before production)
+// @access  Public
+router.post('/dev-register', async (req, res) => {
+  try {
+    const { name, email, phone, password, location, userType } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      await User.deleteOne({ email });
+    }
+    const user = await User.create({
+      name, email, phone, password,
+      userType: userType || 'both',
+      location: {
+        city: location.city,
+        state: location.state,
+        address: location.address || '',
+        pincode: location.pincode || ''
+      }
+    });
+    const token = generateToken(user._id);
+    res.status(201).json({ success: true, email: user.email, token });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;
+
